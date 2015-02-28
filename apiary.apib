@@ -88,6 +88,25 @@ A single main category with details
             "id":3, "title": "Ако носиш червен конец или синьо мънисто, е против уроки"
             }]}
 
+### Add a sub category [POST]
++ Request (application/json)
+
+            {"page":2,
+            "results":[
+        {
+          "id": 4, 
+          "title": "Хвърляне на кръста в реката на Йордановден",
+        }]}
+
++ Response 201 (application/json)
+
+        {"page":2,
+            "results":[
+        {
+          "id": 4, 
+          "title": "Хвърляне на кръста в реката на Йордановден",
+        }]}
+
 # Group Comments
 Comments under subcategories
 ## Coments [/category/{id}/subcat/{id}/coments]
