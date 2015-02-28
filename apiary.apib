@@ -110,12 +110,44 @@ A single main category with details
 # Group Comments
 Comments under subcategories
 ## Coments [/category/{id}/subcat/{id}/coments]
-### List all comments from one of the subcategories [GET]
+### List all comments from single subcategory [GET]
 + Response 200 (application/json)
     
         [{  "id":1,
             "author": "User1",
             "text": "Шопска ръченица - тактов размер 7/16",
+            "subcat": 1
+        }]
+
+## Single Comment info [/category/{id}/subcat/{id}/coments/{id}]
+A single coment info
+
++ Parameters
+    + id (required, number, `1`) ... Numeric `id` of the Runner to perform action with. Has example value.
+
+### Get single coment info [GET]
++ Response 200 (application/json)
+
+    + Body
+    
+            { "id": 1, "author": "User1", "text": "Шопска ръченица - тактов размер 7/16",
+            "subcat": 1}
+
+### Add a single comment [POST]
++ Request (application/json)
+
+         [{  "id":1,
+            "author": "User2",
+            "text": "Копче - тактов размер 7/16",
+            "subcat": 1
+        }]
+
++ Response 201 (application/json)
+
+        
+         [{  "id":1,
+            "author": "User2",
+            "text": "Копче - тактов размер 7/16",
             "subcat": 1
         }]
 
