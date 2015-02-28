@@ -1,29 +1,22 @@
 FORMAT: 1A
 
 # Да съхраним Българското
-Notes API is a *short texts saving* service similar to its physical paper presence on your table.
+An API for this project https://github.com/Stamenov96/DaSuhranimBulgarskoto For more info see the Readme.md file in the repo.
 
-# Group Notes
-Notes related resources of the **Notes API**
+# Group Main Categories
+Categories in the main page
 
-## Notes Collection [/notes]
-### List all Notes [GET]
+## Main Categories [/notes]
+### List all Main Categories [GET]
 + Response 200 (application/json)
 
         [{
-          "id": 1, "title": "Jogging in park"
+          "id": 1, "title": "Народни Танци"
         }, {
-          "id": 2, "title": "Pick-up posters from post-office"
+          "id": 2, "title": "Обичаи"
+        },{
+          "id": 3, "title": "Поверия"
         }]
-
-### Create a Note [POST]
-+ Request (application/json)
-
-        { "title": "Buy cheese and bread for breakfast." }
-
-+ Response 201 (application/json)
-
-        { "id": 3, "title": "Buy cheese and bread for breakfast." }
 
 ## Note [/notes/{id}]
 A single Note object with all its details
