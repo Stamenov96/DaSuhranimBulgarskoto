@@ -19,6 +19,20 @@ All categories in the page
         }]
 
 
+
+## Main Category [/category/{id}]
+A single main category with details
+
++ Parameters
+    + id (required, number, `1`) ... Numeric `id` of the Runner to perform action with. Has example value.
+
+### Get main category details [GET]
++ Response 200 (application/json)
+
+    + Body
+    
+            { "id": 1, "title": "Народни Танци", "desctiption":"Раздел показващ българските народни танци от различните фолклорни области на страната"}
+
 ## Sub Categories [/category/{id}/subcat]
 ### List all Sub Categories [GET]
 + Response 200 (application/json)
