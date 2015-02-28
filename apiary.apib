@@ -11,14 +11,30 @@ All categories in the page
 + Response 200 (application/json)
 
         [{
-          "id": 1, "title": "Народни Танци"
+          "id": 1, "title": "Народни Танци","desctiption":"Раздел показващ българските народни танци от различните фолклорни области на страната"
         }, {
-          "id": 2, "title": "Обичаи"
+          "id": 2, "title": "Обичаи", "desctiption" : "Раздел представящ обичаите на българите"
         },{
-          "id": 3, "title": "Поверия"
+          "id": 3, "title": "Поверия","desctiption" : "Някои народни поверия"
         }]
 
+### Add a main category [POST]
++ Request (application/json)
 
+        {
+          "id": 4, 
+          "title": "Традиции",
+          "description": "Традиците като културна ценност и начин на живот"
+        }
+
++ Response 201 (application/json)
+
+        { 
+            "id": 4, 
+             "title": "Традиции",
+             "description": "Традиците като културна ценност и начин на живот"
+
+        }
 
 ## Main Category [/category/{id}]
 A single main category with details
@@ -32,6 +48,8 @@ A single main category with details
     + Body
     
             { "id": 1, "title": "Народни Танци", "desctiption":"Раздел показващ българските народни танци от различните фолклорни области на страната"}
+
+
 
 ## Sub Categories [/category/{id}/subcat]
 ### List all Sub Categories [GET]
