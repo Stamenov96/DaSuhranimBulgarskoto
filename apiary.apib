@@ -107,19 +107,128 @@ A single main category with details
           "title": "Хвърляне на кръста в реката на Йордановден",
         }]}
 
-# Group Comments
-Comments under subcategories
-## Coments [/category/{id}/subcat/{id}/coments]
-### List all comments from single subcategory [GET]
+### Remove an sub category [DELETE]
++ Response 204
+
+# Group Posts
+Posts in subcategories
+
+## Posts [/category/{id}/subcat/{id}/posts]
+### List all posts from single subcategory [GET]
 + Response 200 (application/json)
     
         [{  "id":1,
             "author": "User1",
-            "text": "Шопска ръченица - тактов размер 7/16",
+            "Title": "Хората в Шопска област",
+            "content": " Самоковско хоро - тактов размер 9/8 
+                        Шопска ръченица 
+        Кукунеш – тактов размер 2/4 
+        Копаница- тактов размер 7/8 
+        Бера - тактов размер 7/8 
+        Йовино хоро 
+        Четворно хоро - тактов размер 7/8 
+        Петрунино хоро - тактов размер 12/16 
+        Кюстендилска ръченица - тактов размер 7/8 
+        За пояс - тактов размер 2/4 "
+            "subcat": 3
+        },
+         {  "id":2,
+            "author": "User2",
+            "Title": "Хората в северняшката област област",
+            "content": " Дайчово хоро - тактов размер 9/8 
+            Свищовско (Дунавско) хоро - тактов размер 4/4 
+            Чичовото 
+            Ситната 
+            Пайдушко хоро – тактов размер 5/8 
+            Ганкино хоро - тактов размер 11/16 
+            Еленино хоро – тактов размер 7/8 /широка/ 
+            Шира"
             "subcat": 1
         }]
 
-## Single Comment info [/category/{id}/subcat/{id}/coments/{id}]
+    
+## Single Post info [/category/{id}/subcat/{id}/post/{id}]
+A single coment info
+
++ Parameters
+    + id (required, number, `1`) ... Numeric `id` of the Runner to perform action with. Has example value.
+
+### Get single post info [GET]
++ Response 200 (application/json)
+
+      + Body
+    
+              [{  "id":1,
+            "author": "User1",
+            "Title": "Хората в Шопска област",
+            "content": " Самоковско хоро - тактов размер 9/8 
+                        Шопска ръченица 
+               Кукунеш – тактов размер 2/4 
+               Копаница- тактов размер 7/8 
+               Бера - тактов размер 7/8 
+               Йовино хоро 
+               Четворно хоро - тактов размер 7/8 
+               Петрунино хоро - тактов размер 12/16 
+               Кюстендилска ръченица - тактов размер 7/8 
+               За пояс - тактов размер 2/4 "
+                   "subcat": 3
+               }]
+
+### Add a single post [POST]
++ Request (application/json)
+
+        [{  "id":1,
+            "author": "User1",
+            "Title": "Хората в Пиринска област",
+            "content": " Арап - тактов размер 4/4 
+              Ширто – тактов размер 7/8 
+              Гинка - тактов размер 7/8 
+                Данке - тактов размер 11/8 
+              Малишевско - тактов размер 4/4 
+             Джангурица - тактов размер 9/8 
+             Кривото - тактов размер 13/16 "
+                   "subcat": 4
+               }]
+
++ Response 201 (application/json)
+
+        
+               [{  "id":1,
+            "author": "User1",
+            "Title": "Хората в Пиринска област",
+            "content": " Арап - тактов размер 4/4 
+              Ширто – тактов размер 7/8 
+              Гинка - тактов размер 7/8 
+                Данке - тактов размер 11/8 
+              Малишевско - тактов размер 4/4 
+             Джангурица - тактов размер 9/8 
+             Кривото - тактов размер 13/16 "
+                   "subcat": 4
+               }]
+               
+### Remove a single post [DELETE]
++ Response 204
+
+# Group Comments
+Comments under subcategories
+
+## Coments [/category/{id}/subcat/{id}/post/{id}/comments]
+### List all comments from single post in subcategory [GET]
++ Response 200 (application/json)
+    
+        [{  "id":1,
+            "author": "User3",
+            "text": "Много полезна информация",
+            "subcat": 1,
+            "post": 1
+        },{  "id":2,
+            "author": "User4",
+            "text": "Имате правописна грешка",
+            "subcat": 1,
+            "post": 1
+        }]
+
+## Single Comment info [/category/{id}/subcat/{id}/post/{id}/comments{id}]
 A single coment info
 
 + Parameters
@@ -130,24 +239,32 @@ A single coment info
 
     + Body
     
-            { "id": 1, "author": "User1", "text": "Шопска ръченица - тактов размер 7/16",
-            "subcat": 1}
+             {  "id":1,
+                    "author": "User3",
+                    "text": "Много полезна информация",
+                    "subcat": 1,
+                   "post": 1
+             }
 
 ### Add a single comment [POST]
 + Request (application/json)
 
          [{  "id":1,
-            "author": "User2",
-            "text": "Копче - тактов размер 7/16",
+            "author": "User4",
+            "text": "Имате грешка в размерността",
             "subcat": 1
+            "post":1
         }]
 
 + Response 201 (application/json)
 
         
          [{  "id":1,
-            "author": "User2",
-            "text": "Копче - тактов размер 7/16",
+            "author": "User4",
+            "text": "Имате грешка в размерността",
             "subcat": 1
+            "post":1
         }]
 
+### Remove a single comment [DELETE]
++ Response 204        
