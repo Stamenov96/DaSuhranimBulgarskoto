@@ -80,6 +80,6 @@ $(document).ready(function() {
 		       },
 		       error:function(exception){alert('Exeption:'+exception);}
 		 })	
-		 return false;
+		 
 	})
 });
