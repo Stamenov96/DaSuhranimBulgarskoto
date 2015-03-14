@@ -65,6 +65,8 @@ $(document).ready(function() {
 		var randid = Math.floor((Math.random() * 100) + 1);
 		 console.log(randid);
 		 
+		// debugger;
+		 
 		 $.ajax('http://private-9ece4-dasuhranimbulgarskoto.apiary-mock.com/users/', { 
 			 method: 'POST',
 			  data: {
@@ -79,7 +81,9 @@ $(document).ready(function() {
 		        alert('You have successfully registered');
 		       },
 		       error:function(exception){alert('Exeption:'+exception);}
+		      
 		 })	
+		 return false;
 		 
 	})
 });
