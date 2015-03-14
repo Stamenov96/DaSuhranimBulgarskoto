@@ -106,9 +106,39 @@ A single main category with details
           "id": 4, 
           "title": "Хвърляне на кръста в реката на Йордановден",
         }]}
+        
+## Single Sub Category info [/category/{id}/subcat/{id}]
 
-### Remove an sub category [DELETE]
+A single sub category with details
+
++ Parameters
+    + id (required, number, `1`) ... Numeric `id` of the category . Has example value.
+
+### Get sub category details [GET]
++ Response 200 (application/json)
+
+    + Body
+    
+            { 
+            "id": 1, "title": "Северняшка област"
+            }, {
+              "id": 2, "title": "Добруджанска област"
+            },{
+              "id": 3, "title": "Шопска област"
+            },{
+            "id": 4, "title": "Пиринска област"
+            },{
+              "id": 5, "title": "Родопска област"
+            },{
+             "id": 6, "title": "Тракийска област"
+            },{
+              "id": 7, "title": "Странджанска област"
+            }
+
+
+### Remove a sub category [DELETE]
 + Response 204
+
 
 # Group Posts
 Posts in subcategories
@@ -146,34 +176,6 @@ Posts in subcategories
             "subcat": 1
         }]
 
-    
-## Single Post info [/category/{id}/subcat/{id}/post/{id}]
-A single coment info
-
-+ Parameters
-    + id (required, number, `1`) ... Numeric `id` of the post to perform action with. Has example value.
-
-### Get single post info [GET]
-+ Response 200 (application/json)
-
-      + Body
-    
-              [{  "id":1,
-            "author": "User1",
-            "Title": "Хората в Шопска област",
-            "content": " Самоковско хоро - тактов размер 9/8 
-                        Шопска ръченица 
-               Кукунеш – тактов размер 2/4 
-               Копаница- тактов размер 7/8 
-               Бера - тактов размер 7/8 
-               Йовино хоро 
-               Четворно хоро - тактов размер 7/8 
-               Петрунино хоро - тактов размер 12/16 
-               Кюстендилска ръченица - тактов размер 7/8 
-               За пояс - тактов размер 2/4 "
-                   "subcat": 3
-               }]
-
 ### Add a single post [POST]
 + Request (application/json)
 
@@ -205,6 +207,35 @@ A single coment info
              Кривото - тактов размер 13/16 "
                    "subcat": 4
                }]
+    
+## Single Post info [/category/{id}/subcat/{id}/post/{id}]
+A single coment info
+
++ Parameters
+    + id (required, number, `1`) ... Numeric `id` of the post to perform action with. Has example value.
+
+### Get single post info [GET]
++ Response 200 (application/json)
+
+      + Body
+    
+              [{  "id":1,
+            "author": "User1",
+            "Title": "Хората в Шопска област",
+            "content": " Самоковско хоро - тактов размер 9/8 
+                        Шопска ръченица 
+               Кукунеш – тактов размер 2/4 
+               Копаница- тактов размер 7/8 
+               Бера - тактов размер 7/8 
+               Йовино хоро 
+               Четворно хоро - тактов размер 7/8 
+               Петрунино хоро - тактов размер 12/16 
+               Кюстендилска ръченица - тактов размер 7/8 
+               За пояс - тактов размер 2/4 "
+                   "subcat": 3
+               }]
+
+
                
 ### Remove a single post [DELETE]
 + Response 204
@@ -228,24 +259,6 @@ Comments under subcategories
             "post": 1
         }]
 
-## Single Comment info [/category/{id}/subcat/{id}/post/{id}/comments{id}]
-A single coment info
-
-+ Parameters
-    + id (required, number, `1`) ... Numeric `id` of the comments to perform action with. Has example value.
-
-### Get single coment info [GET]
-+ Response 200 (application/json)
-
-    + Body
-    
-             {  "id":1,
-                    "author": "User3",
-                    "text": "Много полезна информация",
-                    "subcat": 1,
-                   "post": 1
-             }
-
 ### Add a single comment [POST]
 + Request (application/json)
 
@@ -266,6 +279,26 @@ A single coment info
             "post":1
         }]
 
+## Single Comment info [/category/{id}/subcat/{id}/post/{id}/comments{id}]
+A single coment info
+
++ Parameters
+    + id (required, number, `1`) ... Numeric `id` of the comments to perform action with. Has example value.
+
+### Get single coment info [GET]
++ Response 200 (application/json)
+
+    + Body
+    
+             {  "id":1,
+                    "author": "User3",
+                    "text": "Много полезна информация",
+                    "subcat": 1,
+                   "post": 1
+             }
+
+
+
 ### Remove a single comment [DELETE]
 + Response 204
 
@@ -273,24 +306,7 @@ A single coment info
 # Group Users
 Comments under subcategories
 
-## Single user info [/users/{id}]
-A single user info
-
-+ Parameters
-    + id (required, number, `1`) ... Numeric `id` of the users to perform action with. Has example value.
-
-### Get single user info [GET]
-+ Response 200 (application/json)
-
-    + Body
-    
-             {  "id":1,
-                    "name": "PersonX",
-                    "username": "User1",
-                    "email": "personX@gmail.com",
-                   "password": "12345"
-             }
-
+## Users [/users/]
 ### Add an user [POST]
 + Request (application/json)
 
@@ -310,6 +326,28 @@ A single user info
                     "email": "personX@gmail.com",
                    "password": "12345"
              }]
+
+
+
+
+
+## Single user info [/users/{id}]
+A single user info
+
++ Parameters
+    + id (required, number, `1`) ... Numeric `id` of the users to perform action with. Has example value.
+
+### Get single user info [GET]
++ Response 200 (application/json)
+
+    + Body
+    
+             {  "id":1,
+                    "name": "PersonX",
+                    "username": "User1",
+                    "email": "personX@gmail.com",
+                   "password": "12345"
+             }
 
 ### Remove an user [DELETE]
 + Response 204
