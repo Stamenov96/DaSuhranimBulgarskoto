@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	"use strict"
 
-
+/*
 	function handleError(error) {
 		console.error("error", error, arguments);
 	}
@@ -38,6 +38,14 @@ $(document).ready(function() {
 		}).then(function(data) {
 			console.log(data)});
 	
+	*/
+	 
 	
+	
+	
+	})
+	
+	
+	 
 
 });
