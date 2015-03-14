@@ -15,7 +15,7 @@ $(document).ready(function() {
 	}
 	
 	function appendToList(list, post) {
-		var newElement = $("<li><a href="+transliterate(post.title)+".html>"+post.title+"</a></li>");
+		var newElement = $("<li><a href=./maincat/"+transliterate(post.title)+".html>"+post.title+"</a></li>");
 		//newElement.text(post.title);
 		list.append(newElement);
 	}

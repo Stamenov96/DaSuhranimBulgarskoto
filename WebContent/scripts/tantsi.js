@@ -16,7 +16,7 @@ $(document).ready(function() {
 	
 	function appendToList(list, post) {
 		console.log(post.title);
-		var newElement = $("<li><a href="+transliterate(post.title.split(" ")[0])+".html>"+post.title+"</a></li>");
+		var newElement = $("<li><a href=../subcat/"+transliterate(post.title.split(" ")[0])+".html>"+post.title+"</a></li>");
 		//console.log(transliterate(post.title.split(" ")[0]));
 		//newElement.text(post.title);
 		
