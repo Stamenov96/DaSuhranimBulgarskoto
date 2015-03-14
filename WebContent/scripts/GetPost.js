@@ -42,7 +42,7 @@ $(document).ready(function() {
 	 
 	$("#regbutton").click(function() {
 		
-		 name = $("#name").val();
+		 var name = $("#name").val();
 		 var username = $("#username").val();
 		 var email = $("#email").val();
 		 var password = $("#password").val();
@@ -61,12 +61,25 @@ $(document).ready(function() {
 			 alert("You must enter password");
 			 return false;
 		 }
-	
-	
-	
+		 
+		var randid = Math.floor((Math.random() * 100) + 1);
+		 console.log(randid);
+		 
+		 $.ajax('http://private-9ece4-dasuhranimbulgarskoto.apiary-mock.com/users/', { 
+			 method: 'POST',
+			  data: {
+				  	id: randid,
+				    name: name,
+				    username: username,
+		            email: email,
+		            password: password
+			  },
+			  success:function(result)
+		       {
+		        alert('You have successfully registered');
+		       },
+		       error:function(exception){alert('Exeption:'+exception);}
+		 })	
+		 return false;
 	})
-	
-	
-	 
-
 });
