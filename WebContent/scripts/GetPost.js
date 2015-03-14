@@ -24,15 +24,16 @@ $(document).ready(function() {
 
 	
 	
-	$.ajax('http://private-9a35a-firstapi108.apiary-mock.com/notes', {
+	$.ajax('http://private-9ece4-dasuhranimbulgarskoto.apiary-mock.com/category', {
 	  method: "GET"
 	}).then(processResponse, handleError);
 
-	 $.ajax('http://private-9a35a-firstapi108.apiary-mock.com/notes', {
+	 $.ajax('http://private-9ece4-dasuhranimbulgarskoto.apiary-mock.com/category', {
 		  method: 'POST',
 		  data: {
 			  	id:5,
-			    title: 'NEW POST',
+			    title: 'New Main Category',
+			    desctiption: 'This si a new main category'
 		  } 
 		}).then(function(data) {
 			console.log(data)});
