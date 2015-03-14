@@ -40,6 +40,27 @@ $(document).ready(function() {
 	
 	*/
 	 
+	$("#regbutton").click(function() {
+		
+		 name = $("#name").val();
+		 var username = $("#username").val();
+		 var email = $("#email").val();
+		 var password = $("#password").val();
+		
+		
+		 if(name.length <= 0){	 
+			 alert("You must enter name");
+			 return false;
+		 } else if(username.length <= 0){
+			 alert("You must enter username");
+			 return false;
+		 } else if(email.length <= 0){
+			 alert("You must enter email");
+			 return false;
+		 } else if(password.length <= 0){
+			 alert("You must enter password");
+			 return false;
+		 }
 	
 	
 	
