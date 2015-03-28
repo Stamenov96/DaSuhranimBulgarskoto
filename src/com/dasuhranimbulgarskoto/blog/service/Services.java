@@ -5,6 +5,7 @@ public class Services {
 	private static MainCategoryService mainCategoryService;
 	private static SubCategoryService subCategoryService;
 	private static PostService postService;
+	private static CommentService commentService;
 	
 	public synchronized static MainCategoryService getMainCategoryService(){
 		if (mainCategoryService == null) {
@@ -28,7 +29,12 @@ public class Services {
 		return postService;
 	}
 
-
+	public static CommentService getCommentService(){
+		if(commentService == null){
+			commentService = new CommentService();
+		}
+		return commentService;
+	}
 	
 	
 }

@@ -13,18 +13,31 @@ public class Comment {
 	
 	@Column(nullable=false,length=500)
 	private String body;
-	//private User author;
+	
+	private User author;
 	
 
 	@Column(nullable=false,length=50)
-	private Post post;
+	private long postId;
 	
-	public Post getPost() {
-		return post;
+	public User getAuthor() {
+		return author;
 	}
 
-	public void setPost(Post post) {
-		this.post = post;
+//	public void setAuthor(User author) {
+//		this.author = author;
+//	}
+//	
+	public void setAuthor(User author) {
+		this.author=author;
+	}
+
+	public long getPostId() {
+		return postId;
+	}
+
+	public void setPostId(long postId) {
+		this.postId = postId;
 	}
 
 	public Comment(String title,String body){
@@ -48,6 +61,7 @@ public class Comment {
 	}
 
 	
+
 	
 	
 }
