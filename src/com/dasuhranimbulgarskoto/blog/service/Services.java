@@ -3,6 +3,7 @@ package com.dasuhranimbulgarskoto.blog.service;
 public class Services {
 	
 	private static MainCategoryService mainCategoryService;
+	private static SubCategoryService subCategoryService;
 	
 	public synchronized static MainCategoryService getMainCategoryService(){
 		if (mainCategoryService == null) {
@@ -11,4 +12,14 @@ public class Services {
 		return mainCategoryService;
 		
 	}
+	
+	public synchronized static SubCategoryService getSubCategoryService(){
+		if (subCategoryService == null) {
+			subCategoryService = new SubCategoryService();
+		}
+		return subCategoryService;
+	}
+
+	
+	
 }

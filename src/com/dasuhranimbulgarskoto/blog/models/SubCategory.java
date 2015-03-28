@@ -9,22 +9,34 @@ public class SubCategory {
 	
 	@Id
 	@GeneratedValue
-	private int id;
+	private long id;
 	
 	@Column(nullable=false,length=255)
 	private String title;
 	
 	@Column(nullable=false,length=50)
-	private MainCategory mainCategoy;
+	private long mainCategoryId;
 	
-	public SubCategory(String title){
-		this.title=title;
+	@Column(nullable=false,length=500)
+	private String description;
+	
+	public long getMainCategoryId() {
+		return mainCategoryId;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public void setMainCategoryId(long mainCategoryId) {
+		this.mainCategoryId = mainCategoryId;
 	}
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getTitle() {
@@ -34,13 +46,5 @@ public class SubCategory {
 		this.title = title;
 	}
 
-	public MainCategory getMainCategoy() {
-		return mainCategoy;
-	}
-
-	public void setMainCategoy(MainCategory mainCategoy) {
-		this.mainCategoy = mainCategoy;
-	}
-	
 	
 }
