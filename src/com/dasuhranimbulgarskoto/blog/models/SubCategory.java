@@ -15,7 +15,7 @@ public class SubCategory {
 	private String title;
 	
 	@Column(nullable=false,length=50)
-	private MainCategoy mainCategoy;
+	private MainCategory mainCategoy;
 	
 	public SubCategory(String title){
 		this.title=title;
@@ -34,11 +34,11 @@ public class SubCategory {
 		this.title = title;
 	}
 
-	public MainCategoy getMainCategoy() {
+	public MainCategory getMainCategoy() {
 		return mainCategoy;
 	}
 
-	public void setMainCategoy(MainCategoy mainCategoy) {
+	public void setMainCategoy(MainCategory mainCategoy) {
 		this.mainCategoy = mainCategoy;
 	}
 	

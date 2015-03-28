@@ -5,23 +5,23 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 
-public class MainCategoy {
+public class MainCategory {
 	
 	@Id
 	@GeneratedValue
-	private int id;
+	private long id;
 	
 	@Column(nullable=false,length=255)
 	private String title;
 	
-	public MainCategoy(String title){
+	public MainCategory(String title){
 		this.title=title;
 	}
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getTitle() {
