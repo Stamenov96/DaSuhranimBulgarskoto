@@ -11,9 +11,20 @@ public class MainCategory {
 	@GeneratedValue
 	private long id;
 	
-	@Column(nullable=false,length=255)
+	@Column(nullable=false,length=50)
 	private String title;
 	
+	@Column(nullable = false,length = 500)
+	private String description;
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	public MainCategory(String title){
 		this.title=title;
 	}

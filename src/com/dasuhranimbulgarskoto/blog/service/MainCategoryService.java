@@ -35,9 +35,10 @@ public class MainCategoryService {
 	}
 	
 	public MainCategory updateMainCategory(long mainCategoryId,MainCategory mainCategory){
-		MainCategory oldMainCategory = getMainCategory(mainCategory.getId());
-		oldMainCategory.setTitle(mainCategory.getTitle());
-		return oldMainCategory;
+		MainCategory toChange = getMainCategory(mainCategoryId);
+		toChange.setTitle(mainCategory.getTitle());
+		toChange.setDescription(mainCategory.getDescription());
+		return toChange;
 	}
 	
 	public void deleteMainCategory(long mainCategoryId){
