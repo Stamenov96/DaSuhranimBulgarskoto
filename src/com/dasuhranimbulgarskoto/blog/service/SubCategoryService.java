@@ -46,11 +46,5 @@ public class SubCategoryService {
 		subCategories.remove(toDelete);
 	}
 	
-//	public void deleteMainCategory(long mainCategoryId){
-//		final MainCategory toDelete = getMainCategory(mainCategoryId);
-//		mainCategories.remove(toDelete);
-//	}
-//		
-
 	
 }

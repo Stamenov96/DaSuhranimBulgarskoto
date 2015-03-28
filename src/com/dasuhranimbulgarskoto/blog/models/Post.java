@@ -15,18 +15,26 @@ public class Post {
 	
 	@Column(nullable=false,length=500)
 	private String body;
-	//private User author;
 	
-
-	@Column(nullable=false,length=50)
-	private SubCategory subCategory;
+	private User author;
 	
-	public SubCategory getSubCategory() {
-		return subCategory;
+	@Column(nullable=false)
+	private long subCategoryId;
+	
+	public User getAuthor() {
+		return author;
 	}
 
-	public void setSubCategory(SubCategory subCategory) {
-		this.subCategory = subCategory;
+	public void setAuthor(User author) {
+		this.author = author;
+	}
+
+	public long getSubCategoryId() {
+		return subCategoryId;
+	}
+
+	public void setSubCategoryId(long subCategoryId) {
+		this.subCategoryId = subCategoryId;
 	}
 
 	public Post(String title,String body){

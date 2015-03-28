@@ -4,6 +4,7 @@ public class Services {
 	
 	private static MainCategoryService mainCategoryService;
 	private static SubCategoryService subCategoryService;
+	private static PostService postService;
 	
 	public synchronized static MainCategoryService getMainCategoryService(){
 		if (mainCategoryService == null) {
@@ -19,6 +20,14 @@ public class Services {
 		}
 		return subCategoryService;
 	}
+
+	public static PostService getPostService() {
+		if (postService == null) {
+			postService = new PostService();
+		}
+		return postService;
+	}
+
 
 	
 	
