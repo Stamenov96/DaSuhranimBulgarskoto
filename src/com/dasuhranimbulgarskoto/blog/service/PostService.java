@@ -7,6 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 
 import com.dasuhranimbulgarskoto.blog.models.Post;
+import com.dasuhranimbulgarskoto.blog.models.User;
 
 public class PostService {
 
@@ -109,5 +110,18 @@ public class PostService {
 							}
 							em.close();
 						}
-				 	}		
+				 	}
+
+	public List<Post> getPostsByAuthor(User author) {
+		final EntityManager em =
+						emf.createEntityManager();
+					try {
+						return em
+							.createNamedQuery("postsByAuthor", Post.class)
+							.setParameter("author", author)
+							.getResultList();
+					} finally {
+						em.close();
+					}
+	}		
 }
