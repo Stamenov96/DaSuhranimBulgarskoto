@@ -43,6 +43,7 @@ public class SubCategoryRest {
 		public SubCategory getSubCategory(@PathParam("subCategoryId") long subCategoryId){
 			return subCategoryService.getSubCategory(subCategoryId);
 		} 
+		
 			
 		@POST
 		@Path("/")

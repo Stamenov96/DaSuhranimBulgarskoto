@@ -13,7 +13,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 	@NamedQuery(name = "allSubCategories", 
 			query = "SELECT sc from SubCategory sc"),
 	@NamedQuery(name = "subCategoriesByAuthor", 
-			query = "SELECT sc from SubCategory sc where sc.author=:author")
+			query = "SELECT sc from SubCategory sc where sc.author=:author"),
+	@NamedQuery(name = "subCategoriesForMainCategory", 
+		query = "SELECT sc from SubCategory sc where sc.mainCategory=:mainCategory")
 })
 public class SubCategory {
 	
@@ -24,8 +26,8 @@ public class SubCategory {
 	@Column(nullable=false,length=255)
 	private String title;
 	
-	@Column(nullable=false,length=50)
-	private long mainCategoryId;
+	@Column(nullable=false)
+	private MainCategory mainCategory;
 	
 	@Column(nullable=false,length=500)
 	private String description;
@@ -40,17 +42,18 @@ public class SubCategory {
 		return author;
 	}
 	
-	public long getMainCategoryId() {
-		return mainCategoryId;
+	public MainCategory getMainCategory() {
+		return mainCategory;
 	}
+	public void setMainCategory(MainCategory mainCategory) {
+		this.mainCategory = mainCategory;
+	}
+	
 	public String getDescription() {
 		return description;
 	}
 	public void setDescription(String description) {
 		this.description = description;
-	}
-	public void setMainCategoryId(long mainCategoryId) {
-		this.mainCategoryId = mainCategoryId;
 	}
 	
 	public long getId() {

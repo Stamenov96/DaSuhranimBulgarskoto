@@ -2,11 +2,11 @@ package com.dasuhranimbulgarskoto.blog.service;
 
 import java.util.List;
 
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 
+import com.dasuhranimbulgarskoto.blog.models.MainCategory;
 import com.dasuhranimbulgarskoto.blog.models.SubCategory;
 import com.dasuhranimbulgarskoto.blog.models.User;
 
@@ -119,6 +119,20 @@ public class SubCategoryService {
 					} finally {
 						em.close();
 					}
+	}
+
+	public List<SubCategory> getSubCategoriesForMainCategory(MainCategory mainCategory) {
+		final EntityManager em =
+				emf.createEntityManager();
+			try {
+				return em
+					.createNamedQuery("subCategoriesForMainCategory", SubCategory.class)
+					.setParameter("mainCategory", mainCategory)
+					.getResultList();
+			} finally {
+				em.close();
+			}
+		
 	}	
 	
 	

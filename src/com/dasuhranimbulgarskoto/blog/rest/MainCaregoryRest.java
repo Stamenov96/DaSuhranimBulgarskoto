@@ -13,8 +13,10 @@ import javax.ws.rs.core.MediaType;
 
 import com.dasuhranimbulgarskoto.blog.service.MainCategoryService;
 import com.dasuhranimbulgarskoto.blog.service.Services;
+import com.dasuhranimbulgarskoto.blog.service.SubCategoryService;
 import com.dasuhranimbulgarskoto.blog.service.UsersService;
 import com.dasuhranimbulgarskoto.blog.models.MainCategory;
+import com.dasuhranimbulgarskoto.blog.models.SubCategory;
 import com.dasuhranimbulgarskoto.blog.models.User;
 
 
@@ -23,11 +25,13 @@ public class MainCaregoryRest {
 
 	private final MainCategoryService mainCategoryService;
 	private final UsersService usersService;
+	private final SubCategoryService subCategoryService;
 	private final String defaultAuthorEmail ="hello@world";
 	
 	public MainCaregoryRest(){
 		mainCategoryService = Services.getMainCategoryService();
 		usersService = Services.getUsersService();
+		subCategoryService = Services.getSubCategoryService();
 	}
 	
 	@GET
@@ -43,6 +47,15 @@ public class MainCaregoryRest {
 	public MainCategory getMainCategory(@PathParam("mainCategoryId") long mainCategoryId ){
 		return mainCategoryService.getMainCategory(mainCategoryId);
 		
+	}
+	
+	@GET
+	@Path("/{mainCategoryId}/subCategories")
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	// @PathParam binds url parameter (postId) to method parameter (postId)
+	public List<SubCategory> getMainCategorySubCategories(@PathParam("mainCategoryId") long mainCategoryId) {
+		final MainCategory mainCategory = mainCategoryService.getMainCategory(mainCategoryId);
+		return subCategoryService.getSubCategoriesForMainCategory(mainCategory);
 	}
 		
 	@POST
