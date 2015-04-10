@@ -10,16 +10,25 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import com.dasuhranimbulgarskoto.blog.models.Comment;
+import com.dasuhranimbulgarskoto.blog.models.MainCategory;
 import com.dasuhranimbulgarskoto.blog.models.Post;
+import com.dasuhranimbulgarskoto.blog.models.SubCategory;
 import com.dasuhranimbulgarskoto.blog.models.User;
+import com.dasuhranimbulgarskoto.blog.service.CommentService;
+import com.dasuhranimbulgarskoto.blog.service.MainCategoryService;
 import com.dasuhranimbulgarskoto.blog.service.PostService;
 import com.dasuhranimbulgarskoto.blog.service.Services;
+import com.dasuhranimbulgarskoto.blog.service.SubCategoryService;
 import com.dasuhranimbulgarskoto.blog.service.UsersService;
 
 @Path("users")
 public class UsersRest {
 	private final UsersService usersService;
 	private final PostService postService;
+	private final CommentService commentService;
+	private final SubCategoryService subCategoryService;
+	private final MainCategoryService mainCategoryService;
 
 
 // In real world projects this is done by injection
@@ -29,6 +38,9 @@ public class UsersRest {
 	public UsersRest() {
 		usersService = Services.getUsersService();
 		postService = Services.getPostService();
+		commentService = Services.getCommentService();
+		subCategoryService = Services.getSubCategoryService();
+		mainCategoryService = Services.getMainCategoryService();
 	}
 
 	@GET
@@ -46,6 +58,33 @@ public class UsersRest {
 	public List<Post> getUserPosts(@PathParam("userId") long userId) {
 		final User author = usersService.getUser(userId);
 		return postService.getPostsByAuthor(author);
+	}
+	
+	@GET
+	@Path("/{userId}/comments")
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	// @PathParam binds url parameter (postId) to method parameter (postId)
+	public List<Comment> getUserComments(@PathParam("userId") long userId) {
+		final User author = usersService.getUser(userId);
+		return commentService.getCommentsByAuthor(author);
+	}
+	
+	@GET
+	@Path("/{userId}/mainCategories")
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	// @PathParam binds url parameter (postId) to method parameter (postId)
+	public List<SubCategory> getUserSubCategories(@PathParam("userId") long userId) {
+		final User author = usersService.getUser(userId);
+		return subCategoryService.getSubCategoriesByAuthor(author);
+	}
+	
+	@GET
+	@Path("/{userId}/mainCategories")
+	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+	// @PathParam binds url parameter (postId) to method parameter (postId)
+	public List<MainCategory> getUserMainCategories(@PathParam("userId") long userId) {
+		final User author = usersService.getUser(userId);
+		return mainCategoryService.getMainCategoriesByAuthor(author);
 	}
 	
 	
