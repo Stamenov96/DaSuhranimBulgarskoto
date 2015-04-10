@@ -1,6 +1,7 @@
 package com.dasuhranimbulgarskoto.blog.models;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -9,6 +10,7 @@ import javax.persistence.NamedQuery;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
+@Entity(name="SubCategory")
 @NamedQueries({
 	@NamedQuery(name = "allSubCategories", 
 			query = "SELECT sc from SubCategory sc"),

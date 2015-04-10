@@ -1,6 +1,7 @@
 package com.dasuhranimbulgarskoto.blog.models;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -9,6 +10,7 @@ import javax.persistence.NamedQuery;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
+@Entity(name="MainCategory")
 @NamedQueries({
 	@NamedQuery(name = "allMainCategories", 
 			query = "SELECT mc from MainCategory mc"),
@@ -20,7 +22,7 @@ public class MainCategory {
 	@Id
 	@GeneratedValue
 	private long id;
-	
+	 
 	@Column(nullable=false,length=50)
 	private String title;
 	

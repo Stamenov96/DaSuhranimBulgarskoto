@@ -70,7 +70,7 @@ public class UsersRest {
 	}
 	
 	@GET
-	@Path("/{userId}/mainCategories")
+	@Path("/{userId}/subCategories")
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	// @PathParam binds url parameter (postId) to method parameter (postId)
 	public List<SubCategory> getUserSubCategories(@PathParam("userId") long userId) {

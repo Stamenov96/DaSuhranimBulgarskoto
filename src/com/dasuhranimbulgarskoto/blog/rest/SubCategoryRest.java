@@ -57,7 +57,7 @@ public class SubCategoryRest {
 		@PUT
 		@Path("/{subCategoryId}")
 		@Produces({ MediaType.APPLICATION_JSON })
-		public SubCategory upSubCategory(@PathParam("subCategoryId") long subCategoryId,SubCategory subCategory){
+		public SubCategory updateSubCategory(@PathParam("subCategoryId") long subCategoryId,SubCategory subCategory){
 			return subCategoryService.updateSubCategory(subCategoryId, subCategory);
 		}
 		
