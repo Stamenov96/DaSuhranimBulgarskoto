@@ -16,18 +16,20 @@ import com.dasuhranimbulgarskoto.blog.models.Post;
 import com.dasuhranimbulgarskoto.blog.models.User;
 import com.dasuhranimbulgarskoto.blog.service.PostService;
 import com.dasuhranimbulgarskoto.blog.service.Services;
+import com.dasuhranimbulgarskoto.blog.service.UsersService;
 
 @Path("posts")
 public class PostRest {
 	
 	private final PostService postService;
-	private final User defaultAuthor;
+	private final UsersService usersService;
+		// TODO should be get from session
+		private final String defaultAuthorEmail ="hello@world";
 
 	public PostRest() {
 			postService = Services.getPostService();	
-			defaultAuthor = new User();
-			defaultAuthor.setEmail("hello@world");
-			defaultAuthor.setPassword("secret");
+			usersService = Services.getUsersService();
+
 		}
 
 		@GET
@@ -49,7 +51,9 @@ public class PostRest {
 		@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 		@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 		public Post createPost(Post post) {
-			post.setAuthor(defaultAuthor);
+			final User author =
+							usersService.getUserByEmail(defaultAuthorEmail);
+			post.setAuthor(author);
 			return postService.createPost(post);
 		}
 		

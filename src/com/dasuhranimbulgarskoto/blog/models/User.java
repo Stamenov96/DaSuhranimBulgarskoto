@@ -1,9 +1,31 @@
 package com.dasuhranimbulgarskoto.blog.models;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.xml.bind.annotation.XmlRootElement;
+
+
+@XmlRootElement
+//name specifies the name of the table that will hold this entity
+@Entity(name="Users")
+@NamedQueries({
+	@NamedQuery(name = "userByEmail", 
+		query = "SELECT u from Users u where u.email=:email")
+})
 public class User {
 
+	@Id
+	@GeneratedValue
 	private long id;
+	
+	@Column(nullable=false, length=50, unique=true)
 	private String email;
+	
+	@Column(nullable=false, length=50)
 	private String password;
 	
 	

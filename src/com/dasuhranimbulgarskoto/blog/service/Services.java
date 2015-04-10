@@ -8,6 +8,7 @@ public class Services {
 	private static MainCategoryService mainCategoryService;
 	private static SubCategoryService subCategoryService;
 	private static PostService postService;
+	private static UsersService usersService;
 	private static CommentService commentService;
 	private static EntityManagerFactory entityManagerFactory;
 	
@@ -58,7 +59,19 @@ public class Services {
 		static void setEntityManagerFactory(EntityManagerFactory entityManagerFactory) {
 			Services.entityManagerFactory = entityManagerFactory;
 		}
-		
-	
-	
+
+		public synchronized static UsersService getUsersService() {
+				// lazy loading
+				if (usersService == null) {
+					usersService = new UsersService();
+					// TODO ensure there is at least one admin user
+				}
+				return usersService;
+			}
+			
+			// for tests purposes
+			static void setUsersService(UsersService usersService) {
+				Services.usersService = usersService;
+			}
+				
 }
