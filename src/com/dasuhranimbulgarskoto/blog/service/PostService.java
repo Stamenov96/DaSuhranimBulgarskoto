@@ -21,7 +21,7 @@ public class PostService {
 		
 	}
 	
-	public List<Post> getPost() {
+	public List<Post> getPosts() {
 		//return posts;
 		final EntityManager em=emf.createEntityManager();
 		try {

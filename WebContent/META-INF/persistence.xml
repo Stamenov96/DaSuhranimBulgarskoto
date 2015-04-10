@@ -3,6 +3,9 @@
  	<persistence-unit name="DaSuhranimBulgarskoto">
 		<class>com.dasuhranimbulgarskoto.blog.models.Post</class>
 		<class>com.dasuhranimbulgarskoto.blog.models.User</class>
+		<class>com.dasuhranimbulgarskoto.blog.models.SubCategory</class>
+		<class>com.dasuhranimbulgarskoto.blog.models.MainCategory</class>
+		<class>com.dasuhranimbulgarskoto.blog.models.Comment</class>
 		<exclude-unlisted-classes></exclude-unlisted-classes>
 		<properties>
 		<property name="hibernate.show_sql" value="true" />

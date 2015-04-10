@@ -12,16 +12,21 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.dasuhranimbulgarskoto.blog.models.SubCategory;
+import com.dasuhranimbulgarskoto.blog.models.User;
 import com.dasuhranimbulgarskoto.blog.service.Services;
 import com.dasuhranimbulgarskoto.blog.service.SubCategoryService;
+import com.dasuhranimbulgarskoto.blog.service.UsersService;
 
 @Path("SubCategories")
 public class SubCategoryRest {
 		
 		private final SubCategoryService subCategoryService;
+		private final UsersService usersService;
+		private final String defaultAuthorEmail ="hello@world";
 		
 		public SubCategoryRest() {
 			subCategoryService = Services.getSubCategoryService();
+			usersService = Services.getUsersService();
 		}
 		
 		@GET
@@ -43,6 +48,8 @@ public class SubCategoryRest {
 		@Path("/")
 		@Produces({ MediaType.APPLICATION_JSON })
 		public SubCategory createSubCategory(SubCategory subCategory){
+			final User author =usersService.getUserByEmail(defaultAuthorEmail);
+			subCategory.setAuthor(author);
 			return subCategoryService.createSubCategory(subCategory);
 		}
 		

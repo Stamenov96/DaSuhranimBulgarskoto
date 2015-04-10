@@ -13,16 +13,21 @@ import javax.ws.rs.core.MediaType;
 
 import com.dasuhranimbulgarskoto.blog.service.MainCategoryService;
 import com.dasuhranimbulgarskoto.blog.service.Services;
+import com.dasuhranimbulgarskoto.blog.service.UsersService;
 import com.dasuhranimbulgarskoto.blog.models.MainCategory;
+import com.dasuhranimbulgarskoto.blog.models.User;
 
 
 @Path("MainCategories")
 public class MainCaregoryRest {
 
 	private final MainCategoryService mainCategoryService;
+	private final UsersService usersService;
+	private final String defaultAuthorEmail ="hello@world";
 	
 	public MainCaregoryRest(){
 		mainCategoryService = Services.getMainCategoryService();
+		usersService = Services.getUsersService();
 	}
 	
 	@GET
@@ -44,6 +49,9 @@ public class MainCaregoryRest {
 	@Path("/")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public MainCategory createMainCategory(MainCategory mainCategory){
+		final User author =
+				usersService.getUserByEmail(defaultAuthorEmail);
+		mainCategory.setAuthor(author);
 		return mainCategoryService.createMainCategory(mainCategory);
 	}
 	

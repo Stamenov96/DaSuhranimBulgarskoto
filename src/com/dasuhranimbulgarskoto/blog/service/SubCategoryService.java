@@ -1,50 +1,125 @@
 package com.dasuhranimbulgarskoto.blog.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+
 import com.dasuhranimbulgarskoto.blog.models.SubCategory;
+import com.dasuhranimbulgarskoto.blog.models.User;
 
 public class SubCategoryService {
 
-	private final List<SubCategory> subCategories = new ArrayList<SubCategory>();
-	private long lastSubCategoryId = 0 ;
+
+	private final EntityManagerFactory emf;
 	
-	
-	public List<SubCategory> getSubCategories() {
-		return subCategories;
+	public SubCategoryService(){
+		emf=Services.getEntityManagerFactory();
 	}
 	
-	public SubCategory getSubCategory(long subCategoryId){
-		for (SubCategory subCategory : subCategories) {
-			if (subCategory.getId() == subCategoryId) {
-				return subCategory;
-			}
+	public List<SubCategory> getSubCategories() {
+		final EntityManager em=emf.createEntityManager();
+		try {
+			return em 
+					.createNamedQuery("allSubCategories",SubCategory.class)
+					.getResultList();
+		} finally {
+			em.close();
 		}
+			
 		
-		return null;
+	}
+	
+	public SubCategory getSubCategory(long subcategoryId){
+		final EntityManager em =
+							emf.createEntityManager();
+						try {
+							return em.find(SubCategory.class, subcategoryId);
+						} finally {
+							em.close();
+		}
 	}
 	
 	public synchronized SubCategory createSubCategory(SubCategory subCategory){
-		lastSubCategoryId++;
-		subCategory.setId(lastSubCategoryId);
-		subCategories.add(subCategory);
-			return subCategory;
-		
+		EntityManager em =
+							emf.createEntityManager();
+						final EntityTransaction tx =
+							em.getTransaction();
+						try {
+							tx.begin();
+							em.persist(subCategory);
+							tx.commit();
+							return subCategory;
+						} finally {
+							if (tx.isActive()) {
+								tx.rollback();
+							}
+							em.close();
+						}
 	}
 	
-	public SubCategory updateSubCategory(long subCategoryId,SubCategory subCategory){
-		SubCategory toChange = getSubCategory(subCategoryId);
-		toChange.setMainCategoryId(subCategory.getMainCategoryId());
-		toChange.setTitle(subCategory.getTitle());
-		toChange.setDescription(subCategory.getDescription());
-		return toChange;
+	public SubCategory updateSubCategory(long subcategoryId,SubCategory subCategory){
+		EntityManager em =
+							emf.createEntityManager();
+						final EntityTransaction tx =
+							em.getTransaction();
+						try {
+							tx.begin();
+							final SubCategory fromDb = em.find(SubCategory.class, subcategoryId);
+						if (fromDb != null) {
+								// only body and title should be updated
+								// author should not be changed
+								// disadvantage is that we can miss some
+								// fields that can be updated								
+								fromDb.setDescription(subCategory.getDescription());
+								fromDb.setTitle(subCategory.getTitle());
+								em.merge(fromDb);
+							}
+							tx.commit();
+							return fromDb;
+						} finally {
+							if (tx.isActive()) {
+								tx.rollback();
+							}
+							em.close();
+						}
 	}
 	
-	public void deleteSubCategory(long subCategoryId){
-		final SubCategory toDelete =getSubCategory(subCategoryId);
-		subCategories.remove(toDelete);
-	}
+	
+	public void deleteSubCategory(long subcategoryId){
+		EntityManager em =
+							emf.createEntityManager();
+						final EntityTransaction tx =
+							em.getTransaction();
+						try {
+							tx.begin();
+							final SubCategory fromDb = em.find(SubCategory.class, subcategoryId);
+							if (fromDb != null) {
+								em.remove(fromDb);
+							}
+							tx.commit();
+						} finally {
+							if (tx.isActive()) {
+								tx.rollback();
+							}
+							em.close();
+						}
+				 	}
+
+	public List<SubCategory> getSubCategoriesByAuthor(User author) {
+		final EntityManager em =
+						emf.createEntityManager();
+					try {
+						return em
+							.createNamedQuery("subCategoriesByAuthor", SubCategory.class)
+							.setParameter("author", author)
+							.getResultList();
+					} finally {
+						em.close();
+					}
+	}	
 	
 	
 }

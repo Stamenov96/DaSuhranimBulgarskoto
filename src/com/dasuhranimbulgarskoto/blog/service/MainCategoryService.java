@@ -1,50 +1,123 @@
 package com.dasuhranimbulgarskoto.blog.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+
 import com.dasuhranimbulgarskoto.blog.models.MainCategory;
+import com.dasuhranimbulgarskoto.blog.models.User;
 
 public class MainCategoryService {
 
+
+
+	private final EntityManagerFactory emf;
 	
-	private final List<MainCategory> mainCategories = new ArrayList<MainCategory>();
-	private long lastMainCategoryId = 0 ;
-	
-	
-	public List<MainCategory> getMainCategories() {
-		return mainCategories;
+	public MainCategoryService(){
+		emf=Services.getEntityManagerFactory();
 	}
 	
-	public MainCategory getMainCategory(long mainCategoryId){
-		for (MainCategory mainCategory : mainCategories) {
-			if(mainCategory.getId() == mainCategoryId){
-				return mainCategory;
-			}
+	public List<MainCategory> getMainCategories() {
+		final EntityManager em=emf.createEntityManager();
+		try {
+			return em 
+					.createNamedQuery("allMainCategories",MainCategory.class)
+					.getResultList();
+		} finally {
+			em.close();
 		}
-		return null;
+			
 		
+	}
+	
+	public MainCategory getMainCategory(long maincategoryId){
+		final EntityManager em =
+							emf.createEntityManager();
+						try {
+							return em.find(MainCategory.class, maincategoryId);
+						} finally {
+							em.close();
+		}
 	}
 	
 	public synchronized MainCategory createMainCategory(MainCategory mainCategory){
-		lastMainCategoryId++;
-			mainCategory.setId(lastMainCategoryId);
-			mainCategories.add(mainCategory);
-			return mainCategory;
-		
+		EntityManager em =
+							emf.createEntityManager();
+						final EntityTransaction tx =
+							em.getTransaction();
+						try {
+							tx.begin();
+							em.persist(mainCategory);
+							tx.commit();
+							return mainCategory;
+						} finally {
+							if (tx.isActive()) {
+								tx.rollback();
+							}
+							em.close();
+						}
 	}
 	
-	public MainCategory updateMainCategory(long mainCategoryId,MainCategory mainCategory){
-		MainCategory toChange = getMainCategory(mainCategoryId);
-		toChange.setTitle(mainCategory.getTitle());
-		toChange.setDescription(mainCategory.getDescription());
-		return toChange;
+	public MainCategory updateMainCategory(long maincategoryId,MainCategory mainCategory){
+		EntityManager em =
+							emf.createEntityManager();
+						final EntityTransaction tx =
+							em.getTransaction();
+						try {
+							tx.begin();
+							final MainCategory fromDb = em.find(MainCategory.class, maincategoryId);
+						if (fromDb != null) {
+								
+							
+								fromDb.setDescription(mainCategory.getDescription());
+								fromDb.setTitle(mainCategory.getTitle());
+								em.merge(fromDb);
+							}
+							tx.commit();
+							return fromDb;
+						} finally {
+							if (tx.isActive()) {
+								tx.rollback();
+							}
+							em.close();
+						}
 	}
 	
-	public void deleteMainCategory(long mainCategoryId){
-		final MainCategory toDelete = getMainCategory(mainCategoryId);
-		mainCategories.remove(toDelete);
-	}
-		
+	
+	public void deleteMainCategory(long maincategoryId){
+		EntityManager em =
+							emf.createEntityManager();
+						final EntityTransaction tx =
+							em.getTransaction();
+						try {
+							tx.begin();
+							final MainCategory fromDb = em.find(MainCategory.class, maincategoryId);
+							if (fromDb != null) {
+								em.remove(fromDb);
+							}
+							tx.commit();
+						} finally {
+							if (tx.isActive()) {
+								tx.rollback();
+							}
+							em.close();
+						}
+				 	}
+
+	public List<MainCategory> getMainCategoriesByAuthor(User author) {
+		final EntityManager em =
+						emf.createEntityManager();
+					try {
+						return em
+							.createNamedQuery("mainCategoriesByAuthor", MainCategory.class)
+							.setParameter("author", author)
+							.getResultList();
+					} finally {
+						em.close();
+					}
+	}	
+	
 	
 }

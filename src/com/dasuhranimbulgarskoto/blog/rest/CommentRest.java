@@ -16,18 +16,18 @@ import com.dasuhranimbulgarskoto.blog.models.Comment;
 import com.dasuhranimbulgarskoto.blog.models.User;
 import com.dasuhranimbulgarskoto.blog.service.CommentService;
 import com.dasuhranimbulgarskoto.blog.service.Services;
+import com.dasuhranimbulgarskoto.blog.service.UsersService;
 
 @Path("comments")
 public class CommentRest {
 		
 	private final CommentService commentService;
-	private final User defaultAuthor;
+	private final UsersService usersService;
+	private final String defaultAuthorEmail = "hello@world";
  	
 	public CommentRest(){
 		commentService = Services.getCommentService();
-		defaultAuthor = new User();
-		defaultAuthor.setEmail("hello@world");
-		defaultAuthor.setPassword("secret");
+		usersService = Services.getUsersService();
 		
 	}
 
@@ -50,7 +50,8 @@ public class CommentRest {
 	@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 	public Comment createComment(Comment comment){
-		comment.setAuthor(defaultAuthor);
+		final User author =usersService.getUserByEmail(defaultAuthorEmail);
+		comment.setAuthor(author);
 		return commentService.createComment(comment);
 	}
 			
