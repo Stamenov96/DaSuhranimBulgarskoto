@@ -1,11 +1,15 @@
 package com.dasuhranimbulgarskoto.blog.service;
 
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 public class Services {
 	
 	private static MainCategoryService mainCategoryService;
 	private static SubCategoryService subCategoryService;
 	private static PostService postService;
 	private static CommentService commentService;
+	private static EntityManagerFactory entityManagerFactory;
 	
 	public synchronized static MainCategoryService getMainCategoryService(){
 		if (mainCategoryService == null) {
@@ -35,6 +39,26 @@ public class Services {
 		}
 		return commentService;
 	}
+	
+	
+	public synchronized static EntityManagerFactory getEntityManagerFactory() {
+			// lazy loading
+			if (entityManagerFactory == null) {
+				try {
+					Class.forName("org.apache.derby.jdbc.ClientDriver");
+				} catch (ClassNotFoundException e) {
+					throw new IllegalStateException("No driver", e);
+				}
+				entityManagerFactory = Persistence.createEntityManagerFactory("DaSuhranimBulgarskoto");
+			}
+			return entityManagerFactory;
+		}
+		
+		// for tests purposes
+		static void setEntityManagerFactory(EntityManagerFactory entityManagerFactory) {
+			Services.entityManagerFactory = entityManagerFactory;
+		}
+		
 	
 	
 }

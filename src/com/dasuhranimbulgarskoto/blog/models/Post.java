@@ -1,9 +1,19 @@
 package com.dasuhranimbulgarskoto.blog.models;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
+@Entity(name="Posts")
+@NamedQueries({
+	@NamedQuery(name = "allPosts", 
+		query = "SELECT p from Posts p")
+})
 public class Post {
 
 	@Id
