@@ -55,6 +55,10 @@ public class Post {
 		this.title=title;
 		this.body=body;
 	}
+	public Post(){
+		this.title=title;
+		this.body=body;
+	}
 	
 	public long getId() {
 		return id;

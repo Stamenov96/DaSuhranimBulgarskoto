@@ -53,6 +53,9 @@ public class Comment {
 		this.body=body;
 	}
 
+	public Comment(){
+	}
+
 	public long getId() {
 		return id;
 	}

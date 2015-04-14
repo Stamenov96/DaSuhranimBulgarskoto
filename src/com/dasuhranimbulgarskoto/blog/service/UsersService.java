@@ -1,9 +1,12 @@
 package com.dasuhranimbulgarskoto.blog.service;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 
+import com.dasuhranimbulgarskoto.blog.models.Post;
 import com.dasuhranimbulgarskoto.blog.models.User;
 
 public class UsersService {
@@ -24,6 +27,21 @@ public class UsersService {
 		}
 	}
 	
+		public List<User> getUsers() {
+			//return posts;
+			final EntityManager em=emf.createEntityManager();
+			try {
+				return em 
+						.createNamedQuery("allUsers",User.class)
+						.getResultList();
+			} finally {
+				em.close();
+			}
+			
+			
+			
+		}
+		
 	public User getUser(long userId) {
 		final EntityManager em =
 			emf.createEntityManager();

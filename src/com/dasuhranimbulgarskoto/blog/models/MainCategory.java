@@ -47,6 +47,9 @@ public class MainCategory {
 		this.description = description;
 	}
 
+	public MainCategory(){
+	}
+
 	public MainCategory(String title){
 		this.title=title;
 	}

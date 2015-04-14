@@ -16,7 +16,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity(name="Users")
 @NamedQueries({
 	@NamedQuery(name = "userByEmail", 
-		query = "SELECT u from Users u where u.email=:email")
+		query = "SELECT u from Users u where u.email=:email"),
+		@NamedQuery(name = "allUsers", 
+		query = "SELECT u from Users u")
 })
 public class User {
 

@@ -28,7 +28,7 @@ public class SubCategory {
 	@Column(nullable=false,length=255)
 	private String title;
 	
-	@Column(nullable=false)
+	@ManyToOne(optional=false)
 	private MainCategory mainCategory;
 	
 	@Column(nullable=false,length=500)
